@@ -22,16 +22,17 @@
 
 ## goods テーブル
 
-| Column          | Type      | Options     |
-| --------        | ------    | ----------- |
-| name            | string    | null: false |
-| description     | text      | null: false |
-| category_id     | integer   | null: false |
-| condition_id    | integer   | null: false |
-| shipping_bill_id| integer   | null: false |
-| shipping_area_id| integer   | null: false |
-| shipping_date_id| integer   | null: false |
-| price           | integer   | null: false |
+| Column          | Type      | Options                      |
+| --------        | ------    | -----------                  |
+| name            | string    | null: false                  |
+| description     | text      | null: false                  |
+| category_id     | integer   | null: false                  |
+| condition_id    | integer   | null: false                  |
+| shipping_bill_id| integer   | null: false                  |
+| shipping_area_id| integer   | null: false                  |
+| shipping_date_id| integer   | null: false                  |
+| price           | integer   | null: false                  |
+| user            | reference | null: false foreign_key: true|
 
 
 
@@ -49,7 +50,7 @@
 | postal          | string    | null: false                  |
 | prefecture_id   | integer   | null: false                  |
 | city            | string    | null: false                  |
-| address         | text      | null: false                  |
+| address         | string    | null: false                  |
 | call            | string    | null: false                  |
 | building        | string    |                              |
 | purchase        | reference | null: false foreign_key: true|
