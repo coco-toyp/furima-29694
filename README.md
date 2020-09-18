@@ -26,7 +26,7 @@
 | --------        | ------    | ----------- |
 | name            | string    | null: false |
 | description     | text      | null: false |
-| category_id     | string    | null: false |
+| category_id     | integer   | null: false |
 | condition_id    | integer   | null: false |
 | shipping_bill_id| integer   | null: false |
 | shipping_area_id| integer   | null: false |
@@ -44,20 +44,21 @@
 
 ## profiles テーブル
 
-| Column          | Type      | Options     |
-| --------        | ------    | ----------- |
-| postal          | string    | null: false |
-| prefecture_id   | integer   | null: false |
-| city            | string    | null: false |
-| adress          | text      | null: false |
-| call            | string    | null: false |
-| building        | string    |             |
+| Column          | Type      | Options                      |
+| --------        | ------    | -----------                  |
+| postal          | string    | null: false                  |
+| prefecture_id   | integer   | null: false                  |
+| city            | string    | null: false                  |
+| address         | text      | null: false                  |
+| call            | string    | null: false                  |
+| building        | string    |                              |
+| purchase        | reference | null: false foreign_key: true|
 
 ### Association
 
-- has_one :purchase
+- belongs_to :purchase
 
-## purchase テーブル
+## purchases テーブル
 
 | Column          | Type      | Options                      |
 | --------        | ------    | -----------------------------|
@@ -68,5 +69,5 @@
 
 - belongs_to :user
 - has_one :profile
-- has_one :good
+- belongs_to :good
 
