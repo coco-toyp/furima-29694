@@ -26,11 +26,11 @@
 | --------        | ------    | ----------- |
 | name            | string    | null: false |
 | description     | text      | null: false |
-| category        | string    | null: false |
-| status          | integer   | null: false |
-| shipping_bill   | integer   | null: false |
-| shipping_area   | integer   | null: false |
-| shipping_date   | integer   | null: false |
+| category_id     | string    | null: false |
+| condition_id    | integer   | null: false |
+| shipping_bill_id| integer   | null: false |
+| shipping_area_id| integer   | null: false |
+| shipping_date_id| integer   | null: false |
 | price           | integer   | null: false |
 
 
@@ -47,7 +47,7 @@
 | Column          | Type      | Options     |
 | --------        | ------    | ----------- |
 | postal          | string    | null: false |
-| todofuken       | integer   | null: false |
+| prefecture_id   | integer   | null: false |
 | city            | string    | null: false |
 | adress          | text      | null: false |
 | call            | string    | null: false |
@@ -61,8 +61,8 @@
 
 | Column          | Type      | Options                      |
 | --------        | ------    | -----------------------------|
-| user            | string    | null: false foreign_key: true|
-| good            | integer   | null: false foreign_key: true|
+| user            | reference | null: false foreign_key: true|
+| good            | reference | null: false foreign_key: true|
 
 ### Association
 
