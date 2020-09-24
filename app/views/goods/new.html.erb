@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with local: true do |f| %>
+    <%= form_with model: @good, url: goods_path, local: true do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
     <%# render 'shared/error_messages', model: f.object %>
@@ -21,7 +21,7 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :hoge, id:"item-image" %>
+        <%= f.file_field :image, id:"item-image" %>
       </div>
     </div>
     <%# /出品画像 %>
@@ -31,13 +31,13 @@
         商品名
         <span class="indispensable">必須</span>
       </div>
-      <%= f.text_area :hoge, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_area :hoge, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
+        <%= f.text_area :description, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
       </div>
     </div>
     <%# /商品名と商品説明 %>
@@ -50,12 +50,28 @@
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:hoge, [], :hoge, :hoge, {}, {class:"select-box", id:"item-category"}) %>
+        <select class="select-box" id="category" name="good[category_id]"><option value="0">---</option>
+          <option value="1">レディース</option>
+          <option value="2">メンズ</option>
+          <option value="3">ベビー・キッズ</option>
+          <option value="4">インテリア・住まい・小物</option>
+          <option value="5">本・音楽・ゲーム</option>
+          <option value="6">おもちゃ・ホビー・グッズ</option>
+          <option value="7">家電・スマホ・カメラ</option>
+          <option value="8">スポーツ・レジャー</option>
+          <option value="9">ハンドメイド</option>
+          <option value="10">その他</option></select>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:hoge, [], :hoge, :hoge, {}, {class:"select-box", id:"item-sales-status"}) %>
+        <select class="select-box" id="condition" name="good[condition_id]"><option value="0">---</option>
+          <option value="1">新品、未使用</option>
+          <option value="2">未使用に近い</option>
+          <option value="3">目立った傷や汚れなし</option>
+          <option value="4">やや傷や汚れあり</option>
+          <option value="5">傷や汚れあり</option>
+          <option value="6">全体的に状態が悪い</option></select>
       </div>
     </div>
     <%# /商品の詳細 %>
@@ -71,17 +87,69 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:hoge, [], :hoge, :hoge, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+         <select class="select-box" id="shipping_bill" name="good[shipping_bill_id]"><option value="0">---</option>
+          <option value="1">着払い(購入者負担)</option>
+          <option value="2">送料込み(出品者負担)</option></select>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:hoge, [], :hoge, :hoge, {}, {class:"select-box", id:"item-prefecture"}) %>
+         <select class="select-box" id="shipping_area" name="good[shipping_area_id]"><option value="0">---</option>
+          <option value="1">北海道</option>
+          <option value="2">青森県</option>
+          <option value="3">岩手県</option>
+          <option value="4">宮城県</option>
+          <option value="5">秋田県</option>
+          <option value="6">山形県</option>
+          <option value="7">福島県</option>
+          <option value="8">茨城県</option>
+          <option value="9">栃木県</option>
+          <option value="10">群馬県</option>
+          <option value="11">埼玉県</option>
+          <option value="12">千葉県</option>
+          <option value="13">東京都</option>
+          <option value="14">神奈川県</option>
+          <option value="15">新潟県</option>
+          <option value="16">富山県</option>
+          <option value="17">石川県</option>
+          <option value="18">福井県</option>
+          <option value="19">山梨県</option>
+          <option value="20">長野県</option>
+          <option value="21">岐阜県</option>
+          <option value="22">静岡県</option>
+          <option value="23">愛知県</option>
+          <option value="24">三重県</option>
+          <option value="25">滋賀県</option>
+          <option value="26">京都府</option>
+          <option value="27">大阪府</option>
+          <option value="28">兵庫県</option>
+          <option value="29">奈良県</option>
+          <option value="30">和歌山県</option>
+          <option value="31">鳥取県</option>
+          <option value="32">島根県</option>
+          <option value="33">岡山県</option>
+          <option value="34">広島県</option>
+          <option value="35">山口県</option>
+          <option value="36">徳島県</option>
+          <option value="37">香川県</option>
+          <option value="38">愛媛県</option>
+          <option value="39">高知県</option>
+          <option value="40">福岡県</option>
+          <option value="41">佐賀県</option>
+          <option value="42">長崎県</option>
+          <option value="43">熊本県</option>
+          <option value="44">大分県</option>
+          <option value="45">宮崎県</option>
+          <option value="46">鹿児島県</option>
+          <option value="47">沖縄県</option></select>
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:hoge, [], :hoge, :hoge, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+        <select class="select-box" id="shipping_date" name="good[shipping_date_id]"><option value="0">---</option>
+          <option value="1">1~2日で発送</option>
+          <option value="2">2~3日で発送</option>
+          <option value="3">4~7日で発送</option></select>
       </div>
     </div>
     <%# /配送について %>
@@ -99,7 +167,7 @@
             <span class="indispensable">必須</span>
           </div>
           <span class="sell-yen">¥</span>
-          <%= f.text_field :hoge, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
