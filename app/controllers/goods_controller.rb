@@ -2,6 +2,7 @@ class GoodsController < ApplicationController
   before_action :move_to_index, except: [:index,]
 
   def index
+    @goods = Good.all
   end
 
   def new
