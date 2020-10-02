@@ -11,7 +11,11 @@ class Good < ApplicationRecord
     validates :shipping_area_id
     validates :shipping_date_id
     validates :user
-    validates :price, format: {with: /\A[0-9]+\z/, message: "は半角数字で入力してください"}
+    validates :price, format: {with: /\A[0-9]+\z/, message: "は半角数字で入力してください" ,}
+
+    def was_attached?
+      self.image.attached?
+    end
   end
   
 end
