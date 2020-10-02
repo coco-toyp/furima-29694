@@ -53,6 +53,16 @@ describe Good do
         @good.valid?
         expect(@good.errors.full_messages).to include("Price can't be blank")
       end
+      it 'priceは300以上でないと保存できない' do
+        @good.price = 200
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it 'priceは99999999以下でないと保存できない' do
+        @good.price = 1000000000000
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Price must be less than or equal to 99999999")
+      end
  
       it 'imageが存在しないと保存できない' do
         @good.image = nil
