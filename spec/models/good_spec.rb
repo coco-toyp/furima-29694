@@ -28,25 +28,50 @@ describe Good do
         @good.valid?
         expect(@good.errors.full_messages).to include("Category can't be blank")
       end
+      it 'category_idは---では保存できない' do
+        @good.category_id = 1
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Category must be other than 1")
+      end
       it 'condition_idが存在しないと保存できない' do
         @good.condition_id = nil
         @good.valid?
         expect(@good.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'condition_idは---では保存できない' do
+        @good.condition_id = 1
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Condition must be other than 1")
       end
       it 'shipping_bill_idが存在しないと保存できない' do
         @good.shipping_bill_id = nil
         @good.valid?
         expect(@good.errors.full_messages).to include("Shipping bill can't be blank")
       end
+      it 'shipping_bill_idは---では保存できない' do
+        @good.shipping_bill_id = 1
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Shipping bill must be other than 1")
+      end
       it 'shipping_area_idが存在しないと保存できない' do
         @good.shipping_area_id = nil
         @good.valid?
         expect(@good.errors.full_messages).to include("Shipping area can't be blank")
       end
+      it 'shipping_area_idは---では保存できない' do
+        @good.shipping_area_id = 1
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Shipping area must be other than 1")
+      end
       it 'shipping_date_idが存在しないと保存できない' do
         @good.shipping_date_id = nil
         @good.valid?
         expect(@good.errors.full_messages).to include("Shipping date can't be blank")
+      end
+      it 'shipping_date_idは---では保存できない' do
+        @good.shipping_date_id = 1
+        @good.valid?
+        expect(@good.errors.full_messages).to include("Shipping date must be other than 1")
       end
       it 'priceが存在しないと保存できない' do
         @good.price = nil
