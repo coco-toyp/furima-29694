@@ -11,7 +11,7 @@ class GoodsController < ApplicationController
 
   def create
     @good = Good.new(good_params)
-    if @good.save
+    if @good.valid?
       redirect_to root_path
     else
       render :new
