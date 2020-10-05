@@ -32,6 +32,7 @@ class GoodsController < ApplicationController
   def destroy
     good = Good.find(params[:id])
     good.destroy
+    redirect_to root_path
   end
 
   private
