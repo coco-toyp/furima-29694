@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :move_to_index, except: [:index,]
+  before_action :move_to_index, except: [:index, :show]
 
   def index
     @goods = Good.all.order(id: "DESC")
