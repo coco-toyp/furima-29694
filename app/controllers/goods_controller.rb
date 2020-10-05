@@ -29,6 +29,11 @@ class GoodsController < ApplicationController
     @good = Good.find(params[:id])
   end
 
+  def destroy
+    good = Good.find(params[:id])
+    good.destroy
+  end
+
   private
   def good_params
     params.require(:good).permit(:name, :description, :category_id, :condition_id, :shipping_bill_id, :shipping_area_id, :shipping_date_id, :price, :user, :image).merge(user_id: current_user.id)
