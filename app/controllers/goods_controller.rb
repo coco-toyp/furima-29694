@@ -25,6 +25,10 @@ class GoodsController < ApplicationController
     end
   end
 
+  def show
+    @good = Good.find(params[:id])
+  end
+
   private
   def good_params
     params.require(:good).permit(:name, :description, :category_id, :condition_id, :shipping_bill_id, :shipping_area_id, :shipping_date_id, :price, :user, :image).merge(user_id: current_user.id)
