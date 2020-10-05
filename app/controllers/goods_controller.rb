@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :move_to_index, except: [:index,]
+  before_action :move_to_index, except: [:index, :show]
 
   def index
     @goods = Good.all.order(id: "DESC")
@@ -23,6 +23,10 @@ class GoodsController < ApplicationController
     unless user_signed_in?
       redirect_to action: :index
     end
+  end
+
+  def show
+    @good = Good.find(params[:id])
   end
 
   private
