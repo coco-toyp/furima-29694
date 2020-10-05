@@ -19,7 +19,7 @@
         ¥ <%= @good.price %>
       </span>
       <span class="item-postage">
-        <%= ShippingBill.find(@good.shipping_bill_id).name %>
+        <%= @good.shipping_bill.name %>
       </span>
     </div>
 
