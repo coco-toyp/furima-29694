@@ -30,7 +30,7 @@ class GoodsController < ApplicationController
   end
 
   def destroy
-    if good.destroy
+    if @good.destroy
       redirect_to root_path
     else
       render :show
