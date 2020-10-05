@@ -33,7 +33,11 @@ class GoodsController < ApplicationController
   end
 
   def update
-    good.update(good_params)
+    if @good.update(good_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def destroy
