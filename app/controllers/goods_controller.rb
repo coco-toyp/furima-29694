@@ -26,11 +26,6 @@ class GoodsController < ApplicationController
     end
   end
 
-  def show
-  end
-
-  def edit
-  end
 
   def update
     if @good.update(good_params)
