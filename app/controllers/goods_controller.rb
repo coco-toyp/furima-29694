@@ -1,6 +1,6 @@
 class GoodsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_good, only: [:destroy, :show]
+  before_action :set_good, only: [:destroy, :show, :edit, :update]
 
   def index
     @goods = Good.all.order(id: "DESC")
@@ -26,7 +26,13 @@ class GoodsController < ApplicationController
     end
   end
 
-  def show
+
+  def update
+    if @good.update(good_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def destroy
