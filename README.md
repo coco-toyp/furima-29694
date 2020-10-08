@@ -48,7 +48,7 @@
 | Column          | Type      | Options                      |
 | --------        | ------    | -----------                  |
 | postal          | string    | null: false                  |
-| prefecture_id   | integer   | null: false                  |
+|shipping_area_id | integer   | null: false                  |
 | city            | string    | null: false                  |
 | address         | string    | null: false                  |
 | call            | string    | null: false                  |
