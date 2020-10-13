@@ -40,6 +40,7 @@
 
 - belongs_to :user
 - has_one :purchase
+- has_one :order
 
 
 
@@ -59,6 +60,7 @@
 ### Association
 
 - belongs_to :purchase
+- belongs_to :good
 
 
 ## purchases テーブル

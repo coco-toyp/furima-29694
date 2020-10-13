@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :set_good
+
   def index
     @order = Order.new
   end
@@ -6,6 +8,12 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.valid?
+      Payjp.api_key = "sk_test_9261f0d617a10d4f90d76b1d"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+      Payjp::Charge.create(
+        amount: @good.price,  # 商品の値段
+        card: order_params[:token],    # カードトークン
+        currency: 'jpy'                 # 通貨の種類（日本円）
+      )
       @order.save
       return redirect_to root_path
     else
@@ -14,8 +22,12 @@ class OrdersController < ApplicationController
   end
 
   private
+  
+  def set_good
+    @good = Good.find(params[:good_id])
+  end
 
   def order_params
-    params.require(:order).permit(:postal, :shipping_area_id, :city, :address, :call, :building, :purchase)
+    params.require(:order).permit(:postal, :shipping_area_id, :city, :address, :building, :call).merge(token: params[:token])
   end
 end

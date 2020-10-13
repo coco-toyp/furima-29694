@@ -54,21 +54,32 @@ ActiveRecord::Schema.define(version: 2020_10_08_025623) do
     t.string "city", null: false
     t.string "address", null: false
     t.string "call", null: false
-    t.string "building", null: false
+    t.string "building"
+    t.bigint "purchase_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchase_id"], name: "index_orders_on_purchase_id"
+  end
+
+  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "good_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["good_id"], name: "index_purchases_on_good_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "nickname", limit: 255, null: false
-    t.string "first_name", limit: 255, null: false
-    t.string "last_name", limit: 255, null: false
-    t.string "first_kananame", limit: 255, null: false
-    t.string "last_kananame", limit: 255, null: false
+    t.string "nickname", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "first_kananame", null: false
+    t.string "last_kananame", null: false
     t.date "birthday", null: false
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 255, default: "", null: false
-    t.string "reset_password_token", limit: 255
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
@@ -79,4 +90,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_025623) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "goods", "users"
+  add_foreign_key "orders", "purchases"
+  add_foreign_key "purchases", "goods"
+  add_foreign_key "purchases", "users"
 end
