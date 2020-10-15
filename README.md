@@ -40,15 +40,17 @@
 
 - belongs_to :user
 - has_one :purchase
+- has_one :order
 
 
 
-## profiles テーブル
+
+## orders テーブル
 
 | Column          | Type      | Options                      |
 | --------        | ------    | -----------                  |
 | postal          | string    | null: false                  |
-| prefecture_id   | integer   | null: false                  |
+|shipping_area_id | integer   | null: false                  |
 | city            | string    | null: false                  |
 | address         | string    | null: false                  |
 | call            | string    | null: false                  |
@@ -58,6 +60,8 @@
 ### Association
 
 - belongs_to :purchase
+- belongs_to :good
+
 
 ## purchases テーブル
 
@@ -69,6 +73,6 @@
 ### Association
 
 - belongs_to :user
-- has_one :profile
+- has_one :order
 - belongs_to :good
 
