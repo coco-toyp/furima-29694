@@ -14,7 +14,7 @@ RSpec.describe PurchaseOrder, type: :model do
       @purchase_order.valid?
       expect(@purchase_order.errors.full_messages).to include("Postal can't be blank")
     end
-    it 'postalが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+    it 'postalが半角のハイフンが必要であること' do
       @purchase_order.postal = '1111111'
       @purchase_order.valid?
       expect(@purchase_order.errors.full_messages).to include("Postal is invalid. Include hyphen(-)")
@@ -37,6 +37,11 @@ RSpec.describe PurchaseOrder, type: :model do
       @purchase_order.call = nil
       @purchase_order.valid?
       expect(@purchase_order.errors.full_messages).to include("Call can't be blank")
+    end
+    it 'callが11ケタ以上であると購入できない' do
+      @purchase_order.call = "0001110001112"
+      @purchase_order.valid?
+      expect(@purchase_order.errors.full_messages).to include("Call is invalid")
     end
     it 'cityが空だと保存できないこと' do
       @purchase_order.city = nil
