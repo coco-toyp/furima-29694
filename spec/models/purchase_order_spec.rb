@@ -9,6 +9,10 @@ RSpec.describe PurchaseOrder, type: :model do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@purchase_order).to be_valid
     end
+    it 'buildingは空でも保存できること' do
+      @purchase_order.building = nil
+      expect(@purchase_order).to be_valid
+    end
     it 'postalが空だと保存できないこと' do
       @purchase_order.postal = nil
       @purchase_order.valid?
@@ -28,10 +32,6 @@ RSpec.describe PurchaseOrder, type: :model do
       @purchase_order.shipping_area_id = 1
       @purchase_order.valid?
       expect(@purchase_order.errors.full_messages).to include("Shipping area must be other than 1")
-    end
-    it 'buildingは空でも保存できること' do
-      @purchase_order.building = nil
-      expect(@purchase_order).to be_valid
     end
     it 'callが空だと保存できないこと' do
       @purchase_order.call = nil
