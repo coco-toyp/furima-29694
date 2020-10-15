@@ -38,6 +38,11 @@ RSpec.describe PurchaseOrder, type: :model do
       @purchase_order.valid?
       expect(@purchase_order.errors.full_messages).to include("Call can't be blank")
     end
+    it 'callにハイフンが含まれると購入できない' do
+      @purchase_order.call = "080-6765-1112"
+      @purchase_order.valid?
+      expect(@purchase_order.errors.full_messages).to include("Call is invalid")
+    end
     it 'callが11ケタ以上であると購入できない' do
       @purchase_order.call = "0001110001112"
       @purchase_order.valid?
