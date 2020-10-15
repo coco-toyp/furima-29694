@@ -131,7 +131,7 @@
        <% @goods.each do |good| %>
         <%= link_to good_path(good.id), method: :get do %>
         <div class='item-img-content'>
-          <%= image_tag good.image, class: "item-img" %>
+          <%= image_tag good.image, class: "item-img" if good.image.attached? %>
 
           
           <% if good.purchase%>

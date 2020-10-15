@@ -10,6 +10,7 @@ class Good < ApplicationRecord
   belongs_to_active_hash :shipping_date
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :description
     with_options numericality: { other_than: 1 }  do
@@ -24,9 +25,7 @@ class Good < ApplicationRecord
     
 
 
-    def was_attached?
-      self.image.attached?
-    end
+  
   end
   
 end
