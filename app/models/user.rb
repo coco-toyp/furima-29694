@@ -11,8 +11,9 @@ class User < ApplicationRecord
           validates :nickname
           validates :birthday
           validates :email,    uniqueness: {case_sensitive: false},
-                               format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
-          validates :password, length: {minimum: 6}
+                               format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: 'は.comがないと登録できません'}
+          validates :password, length: {minimum: 6} ,format: { with: /\A[a-z]+[0-9]+\z/i, message: 'は半角英数混合で記入してください' }
+
           with_options format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'は全角で入力してください'} do
             validates :first_name
             validates :last_name
