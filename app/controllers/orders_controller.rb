@@ -1,5 +1,27 @@
 class OrdersController < ApplicationController
   before_action :set_good
+  before_action :move_to_sign_in
+  before_action :move_to_root1
+  before_action :move_to_root2
+
+# ログインしていない場合のアクセス制限
+def move_to_sign_in
+  unless  user_signed_in?
+    redirect_to(new_user_session_path) #指定したURLに飛ばす
+  end
+end
+
+def move_to_root1
+  if  @good.user == current_user
+    redirect_to(root_path) #指定したURLに飛ばす
+  end
+end
+
+def move_to_root2
+  if  @good.purchase
+    redirect_to(root_path) #指定したURLに飛ばす
+  end
+end
 
   def index
     @purchase_order = PurchaseOrder.new
